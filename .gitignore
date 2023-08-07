@@ -1,0 +1,9 @@
+#build
+build/**/
+!/build/config/
+
+#intellij
+/.idea/
+
+#temp files
+__pychache__/

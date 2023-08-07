@@ -1,0 +1,53 @@
+{
+  "name" : "test_executor",
+  "type" : "exe",
+  "clear_build_path" : false,
+  "build_in" : "test_executor.exe",
+  "next": [
+	{
+	  "build" : "py_package",
+	  "config" : {
+	    "author_name" : "eons",
+        "author_email" : "support@eons.llc",
+        "description" : "Test Executor",
+        "package_url" : "https://github.com/eons-dev/lib_eons",
+        "license" : "MIT License",
+        "python_min" : "3.7",
+        "classifiers" : [
+          "Development Status :: 3 - Alpha"
+        ],
+        "requirements" : [
+          "pip",
+          "build",
+          "wheel",
+          "setuptools",
+          "twine",
+          "pytest"
+        ],
+        "next" : [
+          {
+            "build" : "py_install",
+            "build_in" : "../",
+            "config" : {}
+          }
+        ]
+      }
+    },
+    {
+      "build" : "test_case",
+      "config" : {
+        "assertions" : [
+          {
+            "kind" : "command",
+            "check" : "output",
+            "command" : "test_executor --verbosity 0",
+            "expected" : [
+              "Hello world!"
+            ],
+            "comparator" : "eq"
+          }
+        ]
+      }
+    }
+  ]
+}

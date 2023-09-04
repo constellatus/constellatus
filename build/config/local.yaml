@@ -24,11 +24,29 @@ next:
 		next:
 		- build: py_install
 			build_in: ../
-			config:
-					next:
-					- build: py_publish
-						run_when_any:
-						- release
-						build_in: ./
-						config:
-							clear_build_path: false
+			config: {}
+					# next:
+					# - build: py_publish
+					# 	run_when_any:
+					# 	- release
+					# 	build_in: ./
+					# 	config:
+					# 		clear_build_path: false
+- build: docker
+	run_when_any:
+	- release
+	path: ../img
+	build_in: build
+	config:
+		type: img
+		base_image: eons/base.img
+		image_name: eons/constellatus.img
+		image_os: alpine
+		entrypoint: /launch
+		launch:
+			constellatus: python -m constellatus -c /etc/constellatus/config
+		install: []
+		also:
+		- RUN pip install constellatus
+		tags:
+		- latest

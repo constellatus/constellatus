@@ -31,7 +31,7 @@ class TEST_EXECUTOR(eons.Executor):
 		this.observatory.url = "http://localhost:1137"
 
 		hello = this.GetRegistered("hello_world", "functor")
-		hello.enableAutoReturn = False
+		hello.feature.autoReturn = False
 		hello(executor=this)
 
 	def PostCall(this):

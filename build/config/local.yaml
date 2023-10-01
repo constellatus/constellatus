@@ -1,30 +1,30 @@
 name: constellatus
 type: exe
 next:
-- build: py_package
-	build_in: pkg
-	copy:
-	- "/src/": "src/"
-	- "/inc/": "inc/"
-	- "/test/": "test/"
-	- "/README.md": "README.md"
-	- "/LICENSE": "LICENSE"
-	config:
-		clear_build_path: false
-		author_name: eons
-		author_email: support@eons.llc
-		description: Elder data composition
-		package_url: https://github.com/constellatus/constellatus
-		license: MIT License
-		python_min: '3.7'
-		skip_module_detection:
-		- yaml
-		classifiers:
-		- 'Development Status :: 4 - Beta'
-		next:
-		- build: py_install
-			build_in: ../
-			config: {}
+#- build: py_package
+#	build_in: pkg
+#	copy:
+#	- "/src/": "src/"
+#	- "/inc/": "inc/"
+#	- "/test/": "test/"
+#	- "/README.md": "README.md"
+#	- "/LICENSE": "LICENSE"
+#	config:
+#		clear_build_path: false
+#		author_name: eons
+#		author_email: support@eons.llc
+#		description: Elder data composition
+#		package_url: https://github.com/constellatus/constellatus
+#		license: MIT License
+#		python_min: '3.7'
+#		skip_module_detection:
+#		- yaml
+#		classifiers:
+#		- 'Development Status :: 4 - Beta'
+#		next:
+#		- build: py_install
+#			build_in: ../
+#			config: {}
 					# next:
 					# - build: py_publish
 					# 	run_when_any:
@@ -35,7 +35,7 @@ next:
 - build: docker
 	run_when_any:
 	- release
-	path: ../img
+#	path: ../img
 	build_in: build
 	config:
 		type: img
@@ -44,9 +44,13 @@ next:
 		image_os: alpine
 		entrypoint: /launch
 		launch:
-			constellatus: python -m constellatus -c /etc/constellatus/config
+			constellatus: python -m constellatus -c /etc/constellatus/config.yaml
 		install: []
 		also:
 		- RUN pip install constellatus
 		tags:
 		- latest
+		next:
+		- build: docker_publish
+		  config:
+		    image_name: eons/constellatus.img

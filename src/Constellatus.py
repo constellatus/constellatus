@@ -35,13 +35,13 @@ class CONSTELLATUS(APIE):
 		)
 
 	def Observe(this, cluster):
-		if (cluster.startswith('::')):
+		if (cluster.startswith(':/')):
 			cluster = cluster[2:]
 		elif(cluster.startswith(':')):
 			cluster = cluster[1:]
 		
-		namespaceString = ':'.join(cluster.split(':')[:-1])
-		packageName = cluster.split(':')[-1]
+		namespaceString = '/'.join(cluster.split('/')[:-1])
+		packageName = cluster.split('/')[-1]
 		packageType = ""
 		if ('.' in packageName):
 			packageType = packageName.split('.')[-1]
